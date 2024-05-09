@@ -107,7 +107,38 @@
                             <button type="submit">Send Message</button>
                         </div>
                     </div>
-                            
+       <div class="tag__tomatoes">
+
+		<div class="contact-cart" v-if="product" v-for="p in cart">
+
+			<div class="carts__cart cart">
+				<div class="cart__pic">
+					<img :src="'img/'+p.image" class="contact_card-pic">
+				</div>
+				
+				<div class="cart__info" >
+					<h1 class="cart__title" >
+						{{p.title}}
+					</h1>
+					<p class="cart__desk">
+						{{p.short_text}}
+					</p>
+				</div>
+
+				<div class="button__close-cart">
+					<button type="submit" class="close__cart" @click.prevent="removeFromCart(p.id)" v-if="checkInCart">
+						<img src="./images/close_icon.jpg" alt="close_icon" class="close_icon">
+					</button>
+				</div>
+
+			</div>
+
+		</div>
+	
+
+	
+	<form name="contact-form" @submit.prevent="makeOrder" v-if="orderVisible==0"> 
+		<div class="wrapper-full-contact">                     
                         </div>
 
                     </div>
