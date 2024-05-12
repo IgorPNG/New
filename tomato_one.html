@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Tomato</title>
+    <title>Cucumber</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <meta name="viewport" content="width=320, initial-scale=1.0"/>
@@ -42,7 +42,7 @@
         </div>
     </header>
 
-    <div class="content2">
+    <div id="products" class="content2">
         <div class="wrapper">
             <div class="row">
                 <div class="return">
@@ -51,9 +51,11 @@
                 </div>
                 <div class="w-2">
                     <div class="p_title">
-                        <h1>TAG 1002 (TAG 809)</h1>
+                        <h1>{{product.title}}
+                            <span>{{product.short_text}}</span> 
+                        </h1>
                     </div>
-                    <div class="p_text1">Tomato Determinate Red Standard Round</div>
+                    
                     <div class="p_star">*****</div>
                     <div class="p_high">
                         <img src="images/tomatos.png" alt="">
@@ -88,9 +90,13 @@
                     </div>
                 </div>
                 <div class="w-2">
-                    <img id="product" src="images/product.jpg" alt="">
+                    <div class="imagee">
+                        <img   :src=product.image alt="">
+                    </div>
+                    
                     <div class="p_button">
-                        <a href="">Download PDF</a>
+                        <a  href="#" @click.prevent="addToCart (product.id)" v-if="!btnVisible">Add to cart</a>
+                        <a  href="contact.html" v-if="btnVisible">Go to cart</a>
                     </div>
                     <p class="p_charac2">Cycle</p>
                     <p class="p_lines2"></p>
@@ -141,6 +147,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

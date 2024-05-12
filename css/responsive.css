@@ -33,7 +33,7 @@
     }
 
     .content3 {
-        padding: 50px 0 25px 0;
+        padding: 50px 15px 25px 15px;
         background-color: #f9f9f9;
         display: flex;
         justify-content: center;
@@ -237,6 +237,28 @@
     .t_lines {
         width: 270px;
     }
+
+    .product {
+        width: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        text-align: left;
+        
+    }
+    .product .cart {
+        width: 75%;
+    }
+    .cart .cart-title {
+        font-size: 17px;
+    }
+    .cart .cart-sub-title {
+        font-size: 15px;
+    }
+    .wrapper .end-end {
+        text-align: center;
+        font-size: 38px;
+    }
 }
 
 
@@ -244,6 +266,10 @@
 
 
 @media(max-width: 969px) {
+    .wrapper .end-end {
+        text-align: center;
+        font-size: 30px;
+    }
     .content2 .wrapper .row {
         display: flex;
         flex-direction: column;
@@ -269,6 +295,8 @@
 
     .product-container {
         justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
 
     .t_product {
@@ -392,7 +420,12 @@
         background-color: #324950;
         padding: 20px 0 13px 0;
     }
-
+    .imagee {
+        justify-content: start;
+    }
+    .imagee img {
+        width: 35%;
+    }
     .icon1 {
         margin-right: 10px;
     }
@@ -401,7 +434,12 @@
         width: 500px;
         height: 500px;
     }
-
+    .cart .cart-title {
+        font-size: 15px;
+    }
+    .cart .cart-sub-title {
+        font-size: 12px;
+    }
 
     #categories {
         flex-direction: column;
@@ -573,7 +611,10 @@
     .footer ul li a {
         margin-left: 0;
     }
-
+    .wrapper .end-end {
+        text-align: center;
+        font-size: 25px;
+    }
     .logos {
         width: 180px;
         height: 100px;
@@ -596,7 +637,9 @@
         width: 500px;
         height: 500px;
     }
-
+    .t_product {
+        width: 60%;
+    }
 }
 
 
@@ -728,7 +771,12 @@
         height: 395px;
         margin-left: 5px;
     }
-    
+    .imagee img {
+        width: 50%;
+    }
+    .imagee {
+        justify-content: center;
+    }
     #gray .wrapper {
         display: flex;
         flex-direction: column;
@@ -774,6 +822,15 @@
         display: flex;
         text-align: center;
         flex-direction: column;
+    }
+    .cart .cart-title {
+        font-size: 13px;
+    }
+    .cart .cart-sub-title {
+        font-size: 10px;
+    }
+    .wrapper .end-end {
+        font-size: 20px;
     }
 }
 

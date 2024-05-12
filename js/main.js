@@ -7,11 +7,12 @@ var app = new Vue({
         { id: 4, title: "Cucumber4", short_text: 'Armenian Cucumber.', image: 'images/Armenian.jpg', desc: "Armenian cucumbers, also known as snake cucumbers or yard-long cucumbers, are long and thin with a pale green skin and few seeds. They have a mild, sweet flavor and a crunchy texture. Armenian cucumbers are a popular choice for salads and sandwiches, but they can also be used for pickling. They are often harvested when they are about 12 inches or so as they quickly become bitter with growth." },
         { id: 5, title: "Cucumber5", short_text: 'English Cucumber', image: 'images/English.jpg', desc: "English cucumbers, also known as seedless cucumbers or hot house cucumbers, are long and narrow with a thin skin and few seeds.They are usually wrapped in plastic to protect them during transport and storage. English cucumbers are a popular choice for salads and sandwiches because of their mild flavor and crunchy texture. They are also great for pickling because they hold their shape well. Together with American cucumbers, English cucumbers are the two most commonly available cucumbers at most groceries." }],
         btnVisible: 0,
-        product: {},
+        product: { },
         cart: [],
         contactFields: [],
         orderSubmitted: false
     },
+    
     mounted: function () {
         console.log(window.localStorage.getItem('prod'));
         this.getProduct();
@@ -19,18 +20,16 @@ var app = new Vue({
         this.getCart();
     },
     methods: {
-        checkInCart: function () {
-            if (this.product && this.product.id && window.localStorage.getItem('cart').split(',').indexOf(String(this.product.id)) != -1) this.btnVisible = 1;
-        },
         addItem: function (id) {
             window.localStorage.setItem('prod', id);
         },
+
         getProduct: function () {
-            if (window.location.hash) {
+            if(window.location.hash) {
                 var id = window.location.hash.replace('#', '');
                 if (this.products && this.products.length > 0) {
                     for (i in this.products) {
-                        if (this.products[i] && this.products[i].id && id == this.products[i].id) this.product = this.products[i];
+                        if (this.products[i] && this.products[i].id && id == this.products[i].id) this.product=this.products[i];
                     }
                 }
             }
@@ -46,24 +45,36 @@ var app = new Vue({
                 this.btnVisible = 1;
             }
         },
+        checkInCart:function(){
+            if(this.product && this.product.id && window.localStorage.getItem('cart').split(',').indexOf (String (this.product.id))!=-1) this.btnVisible=1;
+        },
         getCart: function () {
-            var cartIds = window.localStorage.getItem('cart').split(',');
-            this.cart = this.products.filter(product => cartIds.includes(String(product.id)));
+            var cartIds = [];
+            if (window.localStorage.getItem('cart')) {
+                cartIds = window.localStorage.getItem('cart').split(',');
+            }
+            for (i in this.products) {
+                if (this.products[i] && this.products[i].id && cartIds.includes(String(this.products[i].id) )) this.cart.push(this.products[i]);
+            }
+
         },
         removeFromCart: function (id) {
-            var cart = window.localStorage.getItem('cart').split(',');
+            var cart = [];
+            if (window.localStorage.getItem('cart')) {
+                cart = window.localStorage.getItem('cart').split(',');
+            }
             var index = cart.indexOf(String(id));
-            if (index !== -1) {
+            if (index > -1) {
                 cart.splice(index, 1);
                 window.localStorage.setItem('cart', cart.join());
                 this.cart = [];
                 this.getCart();
             }
         },
-        makeOrder() {
+        makeOrder: function () {
             this.cart = [];
             localStorage.removeItem('cart');
             this.orderSubmitted = true;
-        }
+          }
     }
 });

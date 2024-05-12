@@ -44,62 +44,125 @@
 
     <div id="slider3"></div>
 
-    <div class="content3">
+    <div id="products" class="content3">
         <div class="wrapper">
             <div class="c_title">
                 <h1>Contact us</h1>
             </div>
             <div class="c_star">*****</div>
-            <form action="">
+            <div v-if="orderSubmitted">
+                <div class="end-end">
+                    Super, thanks for your message!
+                    <span>Good luck!</span>
+                </div>
+                <div class="forma">
+                    <div class="left-forma">
+                        <p>
+                            Name: {{ contactFields.username }}
+                        </p>
+                        <p>
+                            Company Name: {{ contactFields.compname }}
+                        </p>
+                        <p>
+                            Position: {{ contactFields.position }}
+                        </p>
+                        <p>
+                            City: {{ contactFields.city }}
+                        </p>
+                        <p>
+                            Country: {{ contactFields.country }}
+                        </p>
+                        <p>
+                            Telephone: {{ contactFields.telephone }}
+                        </p>
+                        <p>
+                            Email: {{ contactFields.email }}
+                        </p>
+                    </div>
+                    <div class="right-forma">
+                        <p>
+                            You are a: {{ contactFields.type }}
+                        </p>
+                        <p>
+                            If other, please specify: {{ contactFields.other_specify }}
+                        </p>
+                        <p>
+                            You are interested in: {{ contactFields.textarea }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <form action="" @submit.prevent="makeOrder" v-if="!orderSubmitted">
+                <div class="product" v-for="item in cart">
+                    <div class="cart">
+                        <div class="cart-left">
+                            <div class="cart-img">
+                                <img :src=item.image alt="">
+                            </div>
+                        </div>
+                        <div class="cart-right">
+                            <div class="cart-title">
+                                {{item.title}}
+                            </div>
+                            <div class="cart-sub-title">
+                                {{item.short_text}}
+                            </div>
+                        </div>
+                        <img @click.prevent="removeFromCart (item.id)" class="cart-end" src="images/krestik.png"
+                            alt="">
+                    </div>
+                </div>
                 <div class="form">
                     <div class="c_left">
                         <div class="c_texin">
                         <div class="c_text">Name *</div>
-                        <div class="c_input"><input type="text" required name="username"></div>
+                        <div class="c_input"><input v-model="contactFields.username" type="text" required name="username"></div>
                     </div>
                     <div class="c_texin">
                         <div class="c_text">Company Name</div>
-                        <div class="c_input"><input type="text" required name="compname"></div>
+                        <div class="c_input"><input v-model="contactFields.compname" type="text" required name="compname"></div>
                     </div>
                     <div class="c_texin">
                         <div class="c_text">Position</div>
-                        <div class="c_input"><input type="text" required name="position"></div>
+                        <div class="c_input"><input v-model="contactFields.position" type="text" required name="position"></div>
                     </div>
                     <div class="c_texin">
                         <div class="c_text">City</div>
-                        <div class="c_input"><input type="text" required name="city"></div>
+                        <div class="c_input"><input v-model="contactFields.city" type="text" required name="city"></div>
                     </div>
                     <div class="c_texin">
                         <div class="c_text">Country</div>
-                        <div class="c_input"><input type="text" required name="country"></div>
+                        <div class="c_input"><input v-model="contactFields.country" type="text" required name="country"></div>
                     </div>
                     <div class="c_texin">
                         <div class="c_text">Telephone</div>
-                        <div class="c_input"><input type="text" required name="telephone"></div>
+                        <div class="c_input"><input v-model="contactFields.telephone" type="text" required name="telephone"></div>
                     </div>
                     <div class="c_texin">
                         <div class="c_text">Email *</div>
-                        <div class="c_input"><input type="email" required name="email"></div>
+                        <div class="c_input"><input v-model="contactFields.email" type="email" required name="email"></div>
                     </div>
                     </div>
                     <div class="c_right">
                         <div class="c_texin">
                         <div class="c_text2">You are a</div>
-                        <select name="type" required>
+                        <select name="type" required v-model="contactFields.type">
                             <option value="">...</option>
-                            <option value="seedprod">seed producer</option>
-                            <option value="cropgenetic">crop geneticist</option>
+                            <option value="seed producer">seed producer</option>
+                            <option value="crop geneticist">crop geneticist</option>
                             <option value="plant breeder">plant breeder</option>
-                            <option value="plantpathol">plant pathologist</option>
+                            <option value="plant pathologist">plant pathologist</option>
                         </select>
                     </div>
                     <div class="c_texin">
                         <div class="c_text2">If other, please specify</div>
-                        <div class="c_input2"><input type="text" required name="other_specify"></div>
+                        <div class="c_input2"><input v-model="contactFields.other_specify" type="text" required name="other_specify"></div>
                     </div>
                     <div class="c_texin">
                         <div class="c_text2">You are interested in</div>
-                        <textarea name="textarea" required></textarea>
+                        <textarea v-model="contactFields.textarea" name="textarea" required></textarea>
                         <div class="c_text3">Please type this code</div>
                         <div class="captcha">
                             <img src="images/captch.png" alt="">
@@ -107,7 +170,13 @@
                             <button type="submit">Send Message</button>
                         </div>
                     </div>
-      
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="adress">
         <div class="a_title">Our Address</div>
@@ -148,6 +217,7 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
